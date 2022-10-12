@@ -3,7 +3,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 # Number of pods to deploy
-replicaCount: 1
+replicaCount: 3
 
 # Docker container to deploy
 image:
@@ -16,8 +16,8 @@ imagePullSecrets: []
 # Resources granted to pod
 resources:
   requests:
-    cpu: "0.1"
-    memory: "200Mi"
+    cpu: "0.5"
+    memory: "512Mi"
 
 podLabels: {}
 
@@ -65,11 +65,11 @@ securityContext:
 
 # Persistence volume
 volume:
-  storageClassName: standard
-  storage: 2Gi
+  storageClassName: openebs-hostpath
+  storage: 20Gi
 
 # Set any JVM options like -Xmx or others
-javaOpts: "-Xms128M -Xmx128M"
+javaOpts: "-Xms256M -Xmx256M"
 
 # zookeeper configuration
 config:
@@ -131,7 +131,7 @@ storageclass:
 
 # JMX port
 jmx:
-  enabled: false
+  enabled: true
   port: 5555
 
 ## Prometheus Exporter Configuration
@@ -140,7 +140,7 @@ prometheus:
   ## JMX Exporter Configuration
   ## ref: https://github.com/prometheus/jmx_exporter
   jmx:
-    enabled: false
+    enabled: true
     image:
       repository: hypertrace/prometheus-jmx-exporter
       tag: 0.1.0
